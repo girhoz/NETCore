@@ -67,7 +67,7 @@ namespace Client
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=home}/{action=Index}/{id?}");
+                    template: "{controller=Departments}/{action=Index}/{id?}");
             });
         }
     }

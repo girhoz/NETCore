@@ -57,7 +57,6 @@ namespace NETCore.Repositories
 
         public async Task<TEntity> Put(TEntity entity)
         {
-            //entity.UpdateDate = DateTimeOffset.Now;
             _myContext.Entry(entity).State = EntityState.Modified;
             await _myContext.SaveChangesAsync();
             return entity;

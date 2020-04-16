@@ -37,3 +37,4 @@ D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.Views.pdb
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.csproj.CopyComplete
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.dll
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.pdb
+D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Employees\Index.g.cshtml.cs

@@ -22,6 +22,24 @@ namespace NETCore.Controllers
             this._repository = repository;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<Department>> Get()
+        {
+            var get = await _repository.Get();
+            return Ok(new { data = get });
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Department>> Get(int id)
+        {
+            var get = await _repository.Get(id);
+            if (get == null)
+            {
+                return NotFound();
+            }
+            return Ok(get);
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, Department entity)
         {

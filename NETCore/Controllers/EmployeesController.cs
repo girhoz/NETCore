@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols;
 using NETCore.Base;
 using NETCore.Models;
 using NETCore.Repositories.Data;
+using NETCore.ViewModels;
 
 namespace NETCore.Controllers
 {
@@ -19,6 +23,23 @@ namespace NETCore.Controllers
         public EmployeesController(EmployeeRepository employeeRepository) : base(employeeRepository)
         {
             this._repository = employeeRepository;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<EmployeeVM>> Get()
+        {
+            return await _repository.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EmployeeVM>> Get(int id)
+        {
+            var get = await _repository.GetById(id);
+            if (get == null)
+            {
+                return NotFound();
+            }
+            return Ok(get);
         }
 
         [HttpPut("{id}")]

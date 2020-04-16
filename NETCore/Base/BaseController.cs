@@ -21,33 +21,13 @@ namespace NETCore.Base
             this._repository = repository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<TEntity>> Get()
-        {
-            var get = await _repository.Get();
-            return Ok(new { data = get });
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TEntity>> Get(int id)
-        {
-            var get = await _repository.Get(id);
-            if (get == null)
-            {
-                return NotFound();
-            }
-            return Ok(get);
-        }
-
         [HttpPost]
         public async Task<ActionResult<TEntity>> Post(TEntity entity)
         {
             entity.CreateDate = DateTimeOffset.Now;
             await _repository.Post(entity);
             return Ok("Insert Success");
-            //return CreatedAtAction("Get", new { id = entity.Id }, entity);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<TEntity>> Delete(int id)
