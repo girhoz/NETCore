@@ -18,10 +18,12 @@ D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.TagHelpers.input.cache
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.TagHelpers.output.cache
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.RazorCoreGenerate.cache
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
+D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Departments\Index.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
+D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Layout\Layout.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -35,5 +37,3 @@ D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.Views.pdb
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.csproj.CopyComplete
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.dll
 D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Client.pdb
-D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Layout\Layout.g.cshtml.cs
-D:\Latihan\NETCore\Client\obj\Debug\netcoreapp2.1\Razor\Views\Departments\Index.g.cshtml.cs

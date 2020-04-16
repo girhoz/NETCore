@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Client.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.Models;
 using Newtonsoft.Json;
@@ -14,34 +15,32 @@ namespace Client.Controllers
     {
         readonly HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("http://localhost:44398/api/")
+            BaseAddress = new Uri("https://localhost:44398/api/")
         };
 
         // GET: Departments
         public IActionResult Index()
         {
-            return View();
-            //return View(LoadDepartment()); //Tampilkan data berdasarkan fungsi loaddepartment
+            //return View();
+            return View(LoadDepartment()); //Tampilkan data berdasarkan fungsi loaddepartment
         }
 
         public JsonResult LoadDepartment()
         {
-            IEnumerable<Department> departments = null;
+            DepartmentJson departmentVM = null;
             var responseTask = client.GetAsync("Departments"); //Access data from department API
             responseTask.Wait(); //Waits for the Task to complete execution.
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode) // if access success
             {
-                var readTask = result.Content.ReadAsAsync<IList<Department>>(); //Get all the data from the API
-                readTask.Wait();
-                departments = readTask.Result; //Tampung setiap data didalam departments
+                var json = JsonConvert.DeserializeObject(result.Content.ReadAsStringAsync().Result).ToString();
+                departmentVM = JsonConvert.DeserializeObject<DepartmentJson>(json); //Tampung setiap data didalam departments
             }
             else
             {
-                departments = Enumerable.Empty<Department>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
-            return Json(departments);  
+            return Json(departmentVM);  
         }
 
         public JsonResult InsertOrUpdate(Department department)
@@ -62,20 +61,22 @@ namespace Client.Controllers
             }
         }
 
-        public async Task<JsonResult> GetById(int Id)
+        public JsonResult GetById(int Id)
         {
-            HttpResponseMessage response = await client.GetAsync("Departments");
-            if (response.IsSuccessStatusCode)
+            DepartmentVM departmentVM = null;
+            var responseTask = client.GetAsync("Departments/" + Id); //Access data from department API
+            responseTask.Wait(); //Waits for the Task to complete execution.
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode) // if access success
             {
-                var data = await response.Content.ReadAsAsync<IList<Department>>();
-                var department = data.FirstOrDefault(D => D.Id == Id);
-                var json = JsonConvert.SerializeObject(department, Formatting.None, new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-                return Json(json);
+                var json = JsonConvert.DeserializeObject(result.Content.ReadAsStringAsync().Result).ToString();
+                departmentVM = JsonConvert.DeserializeObject<DepartmentVM>(json); //Tampung setiap data didalam departments
             }
-            return Json("internal server error");
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(departmentVM);
         }
 
         public JsonResult Delete(int Id)

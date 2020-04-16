@@ -6,22 +6,21 @@ $(document).ready(function () {
         "ajax": {
             url: "/Departments/LoadDepartment", //Nama controller/fungsi pada index controller
             type: "GET",
-            dataType: "json",
-            dataSrc: "",
+            dataType: "json"
         },
         "columnDefs": [
             { "orderable": false, "targets": 3 },
             { "searchable": false, "targets": 3 }
         ],
         "columns": [
-            { "data": "DepartmentName", "name": "Name" },
+            { "data": "name", "name": "Name" },
             {
-                "data": "CreateDate", "render": function (data) {
+                "data": "createDate", "render": function (data) {
                     return moment(data).format('DD/MM/YYYY');
                 }
             },
             {
-                "data": "UpdateDate", "render": function (data) {
+                "data": "updateDate", "render": function (data) {
                     var dateupdate = "Not Updated Yet";
                     var nulldate = null;
                     if (data === nulldate) {
@@ -33,7 +32,7 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return " <td><button type='button' class='btn btn-warning' id='Update' onclick=GetById('" + row.Id + "');>Edit</button> <button type='button' class='btn btn-danger' id='Delete' onclick=Delete('" + row.Id + "');>Delete</button ></td >";
+                    return " <td><button type='button' class='btn btn-warning' Id='Update' onclick=GetById('" + row.id + "');>Edit</button> <button type='button' class='btn btn-danger' Id='Delete' onclick=Delete('" + row.id + "');>Delete</button ></td >";
                 }
             },
         ]
@@ -42,22 +41,23 @@ $(document).ready(function () {
 
 
 function Save() {
+    //debugger;
     var Department = new Object();
-    Department.DepartmentName = $('#DepartmentName').val();
+    Department.Name = $('#Name').val();
     $.ajax({
         type: 'POST',
         url: '/Departments/InsertOrUpdate/',
         data: Department
     }).then((result) => {
         //debugger;
-        if (result.StatusCode === 200) {
+        if (result.statusCode === 200) {
             Swal.fire({
                 position: 'center',
                 type: 'success',
                 title: 'Department Added Succesfully'
             }).then((result) => {
                 if (result.value) {
-                    table.ajax.reload()
+                    table.ajax.reload();
                 }
             });
         }
@@ -65,11 +65,10 @@ function Save() {
             Swal.fire('Error', 'Failed to Add Department', 'error');
             ShowModal();
         }
-    })
+    });
 }
 
 function GetById(Id) {
-    //debugger;
     $.ajax({
         url: "/Departments/GetById/" + Id,
         type: "GET",
@@ -77,9 +76,9 @@ function GetById(Id) {
         dataType: "json",
         async: false,
         success: function (result) {
-            const obj = JSON.parse(result);
-            $('#Id').val(obj.Id);
-            $('#DepartmentName').val(obj.DepartmentName);
+            //debugger;
+            $('#Id').val(result.id);
+            $('#Name').val(result.name);
             $("#createModal").modal('show');
             $("#Save").hide();
             $('#Edit').show();
@@ -87,20 +86,20 @@ function GetById(Id) {
         error: function (errormessage) {
             alert(errormessage.responseText);
         }
-    })
+    });
 }
 
 function Edit() {
     var Department = new Object();
     Department.Id = $('#Id').val();
-    Department.DepartmentName = $('#DepartmentName').val();
+    Department.Name = $('#Name').val();
     $.ajax({
         type: 'POST',
         url: '/Departments/InsertOrUpdate/',
         data: Department
     }).then((result) => {
         //debugger;
-        if (result.StatusCode === 200) {
+        if (result.statusCode === 200) {
             Swal.fire({
                 position: 'center',
                 type: 'success',
@@ -115,7 +114,7 @@ function Edit() {
             Swal.fire('Error', 'Failed to Edit Department', 'error');
             ShowModal();
         }
-    })
+    });
 }
 
 function Delete(Id) {
@@ -130,10 +129,10 @@ function Delete(Id) {
         //debugger;
         if (result.value) {
             $.ajax({
-                url: "/Departments/Delete/",
+                url: "/Departments/Delete/"+ Id,
                 data: { Id: Id }
             }).then((result) => {
-                if (result.StatusCode === 200) {
+                if (result.statusCode === 200) {
                     Swal.fire({
                         position: 'center',
                         type: 'success',
@@ -148,8 +147,8 @@ function Delete(Id) {
                     Swal.fire('Error', 'Failed to Delete Department', 'error');
                     ShowModal();
                 }
-            })
-        };
+            });
+        }
     });
 }
 
@@ -157,7 +156,7 @@ function Delete(Id) {
 function ShowModal() {
     $("#createModal").modal('show');
     $('#Id').val('');
-    $('#DepartmentName').val('');
+    $('#Name').val('');
     $("#Save").show();
     $("#Edit").hide();
 }

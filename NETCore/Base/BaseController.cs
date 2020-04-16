@@ -52,7 +52,6 @@ namespace NETCore.Base
         [HttpDelete("{id}")]
         public async Task<ActionResult<TEntity>> Delete(int id)
         {
-            
             var delete = await _repository.Delete(id);
             if (delete == null)
             {
