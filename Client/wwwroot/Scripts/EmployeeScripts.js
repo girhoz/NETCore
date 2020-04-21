@@ -1,5 +1,4 @@
 ﻿var table = null;
-var dateNow = new Date();
 var Departments = [];
 $(document).ready(function () {
     table = $('#Employees').DataTable({ //Nama table pada index
@@ -11,12 +10,17 @@ $(document).ready(function () {
         },
         "columnDefs": [
             { "orderable": false, "targets": 8 },
-            { "searchable": false, "targets": 8 }
+            { "searchable": false, "targets": 8 },
+            { "searchable": false, "orderable": false, "targets": 0 }
         ],
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { "data": "name", "name": "Name" },
             { "data": "departmentName", "name": "Department Name" },
-            { "data": "email", "name": "Email" },
             {
                 "data": "birthDate", "render": function (data) {
                     return moment(data).format('DD/MM/YYYY');
@@ -42,11 +46,16 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return " <td><button type='button' class='btn btn-warning' Id='Update' onclick=GetById('" + row.id + "');>Edit</button> <button type='button' class='btn btn-danger' Id='Delete' onclick=Delete('" + row.id + "');>Delete</button ></td >";
+                    return " <td><button type='button' class='btn btn-warning' Id='Update' onclick=GetById('" + row.email + "');>Edit</button> <button type='button' class='btn btn-danger' Id='Delete' onclick=Delete('" + row.email + "');>Delete</button ></td >";
                 }
             }
         ]
     });
+    table.on('order.dt search.dt', function () {
+        table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
 });
 
 //Tampung dan tampilkan department kedalam dropdownlist
@@ -79,6 +88,7 @@ LoadDepartment($('#DepartmentOption'));
 function Save() {
     //debugger;
     var Employee = new Object();
+    Employee.Password = $('#Password').val();
     Employee.FirstName = $('#FirstName').val();
     Employee.LastName = $('#LastName').val();
     Employee.Email = $('#Email').val();
@@ -111,6 +121,7 @@ function Save() {
 }
 
 function GetById(Id) {
+    //debugger;
     $.ajax({
         url: "/Employees/GetById/" + Id,
         type: "GET",
@@ -119,11 +130,13 @@ function GetById(Id) {
         async: false,
         success: function (result) {
             //debugger;
-            $('#Id').val(result[0].id);
+            $('#EmailLabel').hide();
+            $('#PasswordLabel').hide();
+            $('#Email').val(result[0].email).hide();
+            $('#Password').hide();
             $('#FirstName').val(result[0].firstName);
             $('#LastName').val(result[0].lastName);
-            $('#Email').val(result[0].email);
-            $('#BirthDate').val(result[0].birthDate);
+            $('#BirthDate').val(moment(result[0].birthDate).format('YYYY-MM-DD'));
             $('#PhoneNumber').val(result[0].phoneNumber);
             $('#Address').val(result[0].address);
             $('#DepartmentOption').val(result[0].department_Id);
@@ -139,10 +152,9 @@ function GetById(Id) {
 
 function Edit() {
     var Employee = new Object();
-    Employee.Id = $('#Id').val();
+    Employee.Email = $('#Email').val();
     Employee.FirstName = $('#FirstName').val();
     Employee.LastName = $('#LastName').val();
-    Employee.Email = $('#Email').val();
     Employee.BirthDate = $('#BirthDate').val();
     Employee.PhoneNumber = $('#PhoneNumber').val();
     Employee.Address = $('#Address').val();
@@ -209,10 +221,14 @@ function Delete(Id) {
 
 function ShowModal() {
     $("#createModal").modal('show');
-    $('#Id').val('');
+    $('#Email').show();
+    $('#Password').show();
+    $('#EmailLabel').show();
+    $('#PasswordLabel').show();
+    $('#Email').val('');
+    $('#Password').val('');
     $('#FirstName').val('');
     $('#LastName').val('');
-    $('#Email').val('');
     $('#BirthDate').val('');
     $('#PhoneNumber').val('');
     $('#Address').val('');

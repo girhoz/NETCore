@@ -14,5 +14,6 @@ namespace NETCore.Context
 
         public DbSet<Department> Department { get; set; }
         public DbSet<Employee> Employee { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

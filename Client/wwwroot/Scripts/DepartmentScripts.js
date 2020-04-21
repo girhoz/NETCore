@@ -1,5 +1,4 @@
 ﻿var table = null;
-var dateNow = new Date();
 $(document).ready(function () {
     //debugger;
     table = $('#Department').DataTable({ //Nama table pada index
@@ -9,10 +8,17 @@ $(document).ready(function () {
             dataType: "json"
         },
         "columnDefs": [
-            { "orderable": false, "targets": 3 },
-            { "searchable": false, "targets": 3 }
+            { "orderable": false, "targets": 4 },
+            { "searchable": false, "targets": 4 },
+            { "searchable": false, "orderable": false, "targets": 0 }
         ],
+        "order": [[0, 'asc']],
         "columns": [
+            {
+                data: null, render: function (data,type,row,meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { "data": "name", "name": "Name" },
             {
                 "data": "createDate", "render": function (data) {
@@ -37,6 +43,11 @@ $(document).ready(function () {
             },
         ]
     });
+    table.on('order.dt search.dt', function () {
+        table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
 });
 
 

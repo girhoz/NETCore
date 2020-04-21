@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NETCore.Migrations
 {
-    public partial class adddepartmentmodel : Migration
+    public partial class addDepartmentModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

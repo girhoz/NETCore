@@ -28,16 +28,5 @@ namespace NETCore.Base
             await _repository.Post(entity);
             return Ok("Insert Success");
         }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<TEntity>> Delete(int id)
-        {
-            var delete = await _repository.Delete(id);
-            if (delete == null)
-            {
-                return NotFound();
-            }
-            return delete;
-        }
     }
 }

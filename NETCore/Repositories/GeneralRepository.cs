@@ -52,7 +52,6 @@ namespace NETCore.Repositories
             await _myContext.Set<TEntity>().AddAsync(entity);
             await _myContext.SaveChangesAsync();
             return entity;
-
         }
 
         public async Task<TEntity> Put(TEntity entity)
@@ -60,6 +59,11 @@ namespace NETCore.Repositories
             _myContext.Entry(entity).State = EntityState.Modified;
             await _myContext.SaveChangesAsync();
             return entity;
+        }
+
+        public async Task<TEntity> GetEmployee(string id)
+        {
+            return await _myContext.Set<TEntity>().FindAsync(id);
         }
     }
 }

@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<!--author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Member Profile</title>
+    <!-- meta_tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Library Membership form A Flat Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+           function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta_tag_Keywords-->
+    <!--css_files-->
+    <link rel="stylesheet" href="~/Content/Edit/css/jquery-ui.css" />
+    <link href="~/Content/Edit/css/style.css" rel="stylesheet" type="text/css" media="all" /><!--stylesheet-->
+    <link rel="stylesheet" href="~/Content/Edit/css/font-awesome.css"> <!--font_wesome_icons-->
+    <link href="//fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet"><!--online_fonts-->
+    <link href="//fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet"><!--online_fonts-->
+    <!--//css_files-->
+</head>
+<body>
+    <div class="w3l-head">
+        <h1>Member Profile</h1>
+    </div>
+    <div class="w3ls-form">
+        <form action="#" medthod="post">
+            <div class="w3l-last-grid1">
+                <div class="w3l-grid1">
+                    <label class="text">First name</label>
+                    <div class="w3l-div">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input type="text" id="FirstName" name="FirstName" placeholder="First Name" required="" />
+                    </div>
+                </div>
+                <div class="w3l-grid2">
+                    <label class="text">Last name</label>
+                    <div class="w3l-div">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input type="text" id="LastName" name="LastName" placeholder="Last Name" required="" />
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="w3l-last-grid1">
+                <div class="w3l-grid1">
+                    <label class="text">phone number</label>
+                    <div class="w3l-div">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="phone number" required="" />
+                    </div>
+                </div>
+                <div class="w3l-grid2">
+                    <label class="text">date of birth</label>
+                    <div class="w3l-div">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <input type="text" class="date" id="BirthDate" name="BirthDate" placeholder="dob" value="YYYY-MM-DD" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'YYYY-MM-DD';}" required="" />
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="w3l-last-grid1">
+                <label class="text">address</label>
+                <div class="w3l-div">
+                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                    <input type="text" id="Address" name="Address" placeholder="current address" required="" />
+                </div>
+
+            </div>
+            <div class="w3l-right-grid1">
+                <label class="text">Department</label>
+                <div class="w3l-div">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <select class="form-contro3" id="DepartmentOption" name="DepartmentOption" required=""></select>
+                </div>
+
+
+                @*<label class="text">Email</label>
+                <div class="w3l-div">*@
+                    @*<i class="fa fa-envelope-o" aria-hidden="true"></i>*@
+                    <input type="hidden" id="Email" name="Email" placeholder="e-mail" required="" />
+                @*</div>*@
+
+            </div>
+            <div class="clear"><</div>
+            <div class="clear"></div>
+            <div class="w3ls-submit">
+                <input asp-controller="Users" asp-action="Update" type="submit" value="Update">
+                <input asp-controller="Users" asp-action="Logout" type="submit" value="LogOut" />
+            </div>
+        </form>
+    </div>
+    <footer></footer>
+
+    <!-- Default-JavaScript -->
+    <script type="text/javascript" src="~/Content/Edit/js/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/UserScripts.js"></script>
+    <script src="~/Scripts/Sweetalert2.js"></script>
+
+    <!-- Calendar -->
+    <script src="~/Content/Edit/js/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#BirthDate,#datepicker1").datepicker();
+        });
+    </script>
+    <!-- //Calendar -->
+</body>
+</html>

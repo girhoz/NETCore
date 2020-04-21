@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols;
@@ -14,6 +15,7 @@ using NETCore.ViewModels;
 
 namespace NETCore.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : BaseController<Employee, EmployeeRepository>
@@ -31,8 +33,9 @@ namespace NETCore.Controllers
             return await _repository.GetAll();
         }
 
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployeeVM>> Get(int id)
+        public async Task<ActionResult<EmployeeVM>> Get(string id)
         {
             var get = await _repository.GetById(id);
             if (get == null)
@@ -42,10 +45,11 @@ namespace NETCore.Controllers
             return Ok(get);
         }
 
+
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, Employee entity)
+        public async Task<ActionResult> Put(string id, Employee entity)
         {
-            var put = await _repository.Get(id);
+            var put = await _repository.GetEmployee(id);
             if (put == null)
             {
                 return BadRequest();
@@ -76,6 +80,20 @@ namespace NETCore.Controllers
             put.UpdateDate = DateTimeOffset.Now;
             await _repository.Put(put);
             return Ok("Update Succesfull");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Employee>> Delete(string id)
+        {
+            var delete = await _repository.GetEmployee(id);
+            if (delete == null)
+            {
+                return NotFound();
+            }
+            delete.DeleteDate = DateTimeOffset.Now;
+            delete.IsDelete = true;
+            await _repository.Put(delete);
+            return delete;
         }
     }
 }
