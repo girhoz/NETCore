@@ -72,7 +72,7 @@ using Client.Models;
             WriteLiteral("\r\n<html lang=\"en\">\r\n");
             EndContext();
             BeginContext(49, 1093, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "06e9946b33e049d48ebbe9d90eaa299b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5f791b9ce11a4f45a18ff863d1748b01", async() => {
                 BeginContext(55, 701, true);
                 WriteLiteral(@"
     <title>Login Page</title>
@@ -88,7 +88,7 @@ using Client.Models;
     ");
                 EndContext();
                 BeginContext(756, 88, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "60cceb9d6b8c4152ae55aaf0158a2f81", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "65693b33c81746b7835a5dc7cf4ef89f", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -128,12 +128,12 @@ using Client.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(1144, 1253, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c01606caa16402383a6ff561b76e9a6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0391dbd02cdc493592f2d8a4dc9cb306", async() => {
                 BeginContext(1150, 242, true);
                 WriteLiteral("\r\n    <!--header-->\r\n    <div class=\"agileheader\">\r\n        <h1>Bootcamp 35</h1>\r\n    </div>\r\n    <!--//header-->\r\n    <!--main-->\r\n    <div class=\"main-w3l\">\r\n        <div class=\"w3layouts-main\">\r\n            <h2>Login Now</h2>\r\n            ");
                 EndContext();
                 BeginContext(1392, 626, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4cd70096b3ea4b69aa6c24eda37a407b", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8da80e7d38374fb59c01279854967cd1", async() => {
                     BeginContext(1423, 588, true);
                     WriteLiteral(@"
                 <input value=""E-MAIL"" name=""Username"" type=""email"" required="""" onfocus=""this.value = '';"" onblur=""if (this.value == '') {this.value = 'E-Mail';}"" />

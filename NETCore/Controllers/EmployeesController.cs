@@ -77,6 +77,10 @@ namespace NETCore.Controllers
             {
                 put.PhoneNumber = entity.PhoneNumber;
             }
+            if (entity.Department_Id != 0)
+            {
+                put.Department_Id = entity.Department_Id;
+            }
             put.UpdateDate = DateTimeOffset.Now;
             await _repository.Put(put);
             return Ok("Update Succesfull");

@@ -45,11 +45,3 @@ $(document).ready(function () {
         }
     });
 });
-
-function Swal() {
-    Swal.fire({
-        position: 'center',
-        type: 'success',
-        title: 'Employee Edit Succesfully'
-    });
-}
