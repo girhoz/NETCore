@@ -63,5 +63,15 @@ namespace NETCore.Repositories.Data
                 return create;
             }
         }
+
+        public async Task<IEnumerable<ChartVM>> GetChart()
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyNetCoreConnection")))
+            {
+                var spName = "SP_GetChartEmployee";
+                var data = await connection.QueryAsync<ChartVM>(spName, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
     }
 }

@@ -123,5 +123,36 @@ namespace Client.Controllers
             //result = client.DeleteAsync("Users/" + Id).Result;
             return Json(result);
         }
+
+        public JsonResult GetDonut()
+        {
+            IEnumerable<ChartVM> chartInfo = null;
+            List<ChartVM> chartData = new List<ChartVM>();
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:44398/api/")
+            };
+            //Get the session with token and set authorize bearer token to API header
+            client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWToken"));
+            var responseTask = client.GetAsync("Employees/ChartInfo"); //Access data from employees API
+            responseTask.Wait(); //Waits for the Task to complete execution.
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode) // if access success
+            {
+                var readTask = result.Content.ReadAsAsync<IList<ChartVM>>(); //Get all the data from the API
+                readTask.Wait();
+                chartInfo = readTask.Result;
+                foreach(var item in chartInfo)
+                {
+                    ChartVM data = new ChartVM();
+                    data.label = item.label;
+                    data.value = item.Total.ToString();
+                    chartData.Add(data);
+                }
+                var json = JsonConvert.SerializeObject(chartData, Formatting.Indented);
+                return Json(json);
+            }
+            return Json("internal server error");
+        }
     }
 }

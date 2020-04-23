@@ -15,7 +15,7 @@ using NETCore.ViewModels;
 
 namespace NETCore.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : BaseController<Employee, EmployeeRepository>
@@ -98,6 +98,14 @@ namespace NETCore.Controllers
             delete.IsDelete = true;
             await _repository.Put(delete);
             return delete;
+        }
+
+        [HttpGet]
+        [Route("ChartInfo")]
+        [HttpGet]
+        public async Task<IEnumerable<ChartVM>> Chart()
+        {
+            return await _repository.GetChart();
         }
     }
 }

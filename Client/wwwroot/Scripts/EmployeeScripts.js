@@ -1,6 +1,9 @@
 ﻿var table = null;
 var Departments = [];
 $(document).ready(function () {
+    //Load Chart
+    Donut();
+    //Load Data Table
     table = $('#Employees').DataTable({ //Nama table pada index
         "ajax": {
             url: "/Employees/LoadEmployee", //Nama controller/fungsi pada index controller
@@ -218,6 +221,28 @@ function Delete(Id) {
     });
 }
 
+function Donut() {
+    debugger;
+    $.ajax({
+        type: 'GET',
+        url: '/Employees/GetDonut/',
+        success: function (data) {
+            debugger;
+            Morris.Donut({
+                element: 'EmployeeChart',
+                data: $.each(JSON.parse(data), function (index, val) {
+                    debugger;
+                    [{
+                        label: val.label,
+                        value: val.value
+                    }]
+                }),
+                resize: true,
+                colors: ['#009efb', '#55ce63', '#2f3d4a']
+            });
+        }
+    })
+};
 
 function ShowModal() {
     $("#createModal").modal('show');
