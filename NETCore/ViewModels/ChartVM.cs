@@ -9,6 +9,6 @@ namespace NETCore.ViewModels
     {
         public int Total { get; set; }
         public string label { get; set; }
-        public string value { get; set; }
+        public int value { get; set; }
     }
 }

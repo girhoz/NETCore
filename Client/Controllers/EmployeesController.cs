@@ -124,7 +124,7 @@ namespace Client.Controllers
             return Json(result);
         }
 
-        public JsonResult GetDonut()
+        public JsonResult GetChart()
         {
             IEnumerable<ChartVM> chartInfo = null;
             List<ChartVM> chartData = new List<ChartVM>();
@@ -146,7 +146,7 @@ namespace Client.Controllers
                 {
                     ChartVM data = new ChartVM();
                     data.label = item.label;
-                    data.value = item.Total.ToString();
+                    data.value = item.Total;
                     chartData.Add(data);
                 }
                 var json = JsonConvert.SerializeObject(chartData, Formatting.Indented);

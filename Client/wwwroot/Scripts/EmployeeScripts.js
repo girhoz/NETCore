@@ -2,6 +2,7 @@
 var Departments = [];
 $(document).ready(function () {
     //Load Chart
+    Bar();
     Donut();
     //Load Data Table
     table = $('#Employees').DataTable({ //Nama table pada index
@@ -221,17 +222,40 @@ function Delete(Id) {
     });
 }
 
-function Donut() {
-    debugger;
+function Bar() {
     $.ajax({
         type: 'GET',
-        url: '/Employees/GetDonut/',
+        url: '/Employees/GetChart/',
         success: function (data) {
-            debugger;
-            Morris.Donut({
-                element: 'EmployeeChart',
+            Morris.Bar({
+                element: 'BarChart',
                 data: $.each(JSON.parse(data), function (index, val) {
-                    debugger;
+                    //debugger;
+                    [{
+                        label: val.label,
+                        value: val.value
+                    }]
+                }),
+                xkey: 'label',
+                ykeys: ['value'],
+                labels: ['Total'],
+                barColors: ['#009efb', '#55ce63', '#2f3d4a'],
+                hideHover: 'auto',
+                gridLineColor: '#eef0f2',
+                resize: true
+            });
+        }
+    })
+};
+
+function Donut() {
+    $.ajax({
+        type: 'GET',
+        url: '/Employees/GetChart/',
+        success: function (data) {
+            Morris.Donut({
+                element: 'DonutChart',
+                data: $.each(JSON.parse(data), function (index, val) {
                     [{
                         label: val.label,
                         value: val.value
